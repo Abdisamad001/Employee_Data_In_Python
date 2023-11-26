@@ -1,122 +1,12 @@
-# Employee_Data_In_Python
-#Employee data analyzing by using Python
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import scipy.stats as stats 
-import plotly.express as px
-import statsmodels.api as sm
+Title: Employee Data Analysis
 
-data = pd.read_csv('C:\\Users\\96653\\Desktop\\Test jupyer\\Employee DATA.csv ')
+Description:
+Welcome to our comprehensive analysis of employee data, where we delve into the intricacies of workforce dynamics and uncover valuable insights. This repository houses a treasure trove of information derived from a dataset comprising 1,470 employee entries.
 
-data.head()
+Immerse yourself in a captivating exploration of various factors that shape the work environment, including age, attrition, business travel patterns, daily rates, departmental affiliations, proximity to home, educational backgrounds, and fields of expertise. Our analysis employs the power of Python, leveraging popular libraries such as pandas, numpy, matplotlib, seaborn, scipy.stats, plotly, and statsmodels.
 
-data.info()
+Step into the world of statistics, visualizations, and data-driven narratives as we unravel the secrets hidden within this employee dataset. Witness the ebb and flow of attrition rates, understand job satisfaction levels across different roles, gain insights into the distribution of monthly incomes, and discover the average age of our dedicated workforce. Moreover, observe the correlation between years of service and monthly income through an engaging scatter plot.
 
-data.describe()
+This repository is a valuable resource for HR professionals, data analysts, and researchers seeking to comprehend employee dynamics while unearthing patterns and trends. The provided code and analysis serve as a compass, guiding you through the intricacies of employee data analysis, whether you are embarking on a similar study or exploring fresh avenues of research.
 
-attrition_rate = data['Attrition'].value_counts() / len(data) * 100
-print(attrition_rate)
-
-job_satisfaction_by_role = data.groupby('JobRole')['JobSatisfaction'].mean()
-print(job_satisfaction_by_role)
-
-plt.hist(data['MonthlyIncome'], bins=20)
-plt.xlabel('Monthly Income')
-plt.ylabel('Count')
-plt.title('Distribution of Monthly Incomes')
-plt.show()
-
-average_age = data['Age'].mean()
-print(average_age)
-
-job_levels = data['JobLevel'].value_counts()
-print(job_levels)
-
-plt.scatter(data['YearsAtCompany'], data['MonthlyIncome'])
-plt.xlabel('Years at Company')
-plt.ylabel('Monthly Income')
-plt.title('Relationship between Years at Company and Monthly Income')
-plt.show()
-
-department_income = data.groupby('Department')['MonthlyIncome'].mean()
-print(department_income)
-
-attrition_by_gender = data.groupby('Gender')['Attrition'].value_counts().unstack()
-attrition_by_gender.plot(kind='bar', stacked=True)
-plt.xlabel('Gender')
-plt.ylabel('Count')
-plt.title('Attrition by Gender')
-plt.legend()
-plt.show()
-
-distance_home_by_role = data.groupby('JobRole')['DistanceFromHome'].mean()
-print(distance_home_by_role)
-
-plt.hist(data['Age'], bins=20)
-plt.xlabel('Age')
-plt.ylabel('Count')
-plt.title('Distribution of Age')
-plt.show()
-
-attrition_counts = data['Attrition'].value_counts()
-plt.bar(attrition_counts.index, attrition_counts.values)
-plt.xlabel('Attrition')
-plt.ylabel('Count')
-plt.title('Attrition Rate')
-plt.show()
-
-business_travel_counts = data['BusinessTravel'].value_counts()
-plt.pie(business_travel_counts, labels=business_travel_counts.index, autopct='%1.1f%%')
-plt.title('Business Travel Distribution')
-plt.show()
-
-plt.scatter(data['MonthlyIncome'], data['JobSatisfaction'])
-plt.xlabel('Monthly Income')
-plt.ylabel('Job Satisfaction')
-plt.title('Monthly Income vs. Job Satisfaction')
-plt.show()
-
-attrition_by_marital = data.groupby(['Attrition', 'MaritalStatus']).size().unstack()
-attrition_by_marital.plot(kind='bar', stacked=True)
-plt.xlabel('Attrition')
-plt.ylabel('Count')
-plt.title('Attrition by Marital Status')
-plt.legend()
-plt.show()
-
-plt.figure(figsize=(10, 6))
-sns.boxplot(x='JobRole', y='MonthlyIncome', data=data)
-plt.xlabel('Job Role')
-plt.ylabel('Monthly Income')
-plt.title('Monthly Income by Job Role')
-plt.xticks(rotation=45)
-plt.show()
-
-numeric_cols = data.select_dtypes(include=np.number).columns
-correlation = data[numeric_cols].corr()
-
-plt.figure(figsize=(10, 8))
-sns.heatmap(correlation, annot=True, cmap='coolwarm')
-plt.title('Correlation Matrix')
-plt.show()
-
-fig = px.violin(data, x='EducationField', y='JobSatisfaction', title='Job Satisfaction by Education Field')
-fig.show()
-
-import statsmodels.api as sm
-
-# Define the predictor and response variables
-X = data['MonthlyIncome']
-y = data['JobSatisfaction']
-
-# Add constant term to predictor variable
-X = sm.add_constant(X)
-
-# Fit the linear regression model
-model = sm.OLS(y, X)
-results = model.fit()
-
-# Print the model summary
-print(results.summary())
+Join us in this fascinating journey through the realms of employee data analysis. Feel free to explore the repository, access the dataset, and utilize the code as a trusted companion in your own analysis or research pursuits.
